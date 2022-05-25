@@ -45,6 +45,8 @@
             this.groupBox_Structure = new System.Windows.Forms.GroupBox();
             this.radioButton_NonLinear = new System.Windows.Forms.RadioButton();
             this.radioButton_Linear = new System.Windows.Forms.RadioButton();
+            this.columnName = new System.Windows.Forms.ColumnHeader();
+            this.columnCategory = new System.Windows.Forms.ColumnHeader();
             this.groupBox_Structure.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -170,11 +172,17 @@
             // 
             // listView_Wiki
             // 
+            this.listView_Wiki.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnName,
+            this.columnCategory});
+            this.listView_Wiki.FullRowSelect = true;
+            this.listView_Wiki.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView_Wiki.Location = new System.Drawing.Point(270, 49);
             this.listView_Wiki.Name = "listView_Wiki";
             this.listView_Wiki.Size = new System.Drawing.Size(299, 416);
             this.listView_Wiki.TabIndex = 16;
             this.listView_Wiki.UseCompatibleStateImageBehavior = false;
+            this.listView_Wiki.View = System.Windows.Forms.View.Details;
             // 
             // groupBox_Structure
             // 
@@ -208,6 +216,16 @@
             this.radioButton_Linear.TabStop = true;
             this.radioButton_Linear.Text = "Linear";
             this.radioButton_Linear.UseVisualStyleBackColor = true;
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "Name";
+            this.columnName.Width = 149;
+            // 
+            // columnCategory
+            // 
+            this.columnCategory.Text = "Category";
+            this.columnCategory.Width = 149;
             // 
             // DataStructureWikiV2
             // 
@@ -257,5 +275,7 @@
         private GroupBox groupBox_Structure;
         private RadioButton radioButton_NonLinear;
         private RadioButton radioButton_Linear;
+        private ColumnHeader columnName;
+        private ColumnHeader columnCategory;
     }
 }

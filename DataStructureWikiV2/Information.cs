@@ -43,29 +43,49 @@ namespace DataStructureWikiV2
         }
 
         // Getters and setters
-        public string gsName
+        
+        public string getName()
         {
-            get { return Name; }
-            set { Name = value; }
+            return this.Name;
         }
 
-        public string gsCategory
+        public string setName(string name)
         {
-            get { return Category; }
-            set { Category = value; }
+            this.Name = name;
+            return this.Name;
         }
 
-        public string gsStructure
+        public string getCategory()
         {
-            get { return Structure; }
-            set { Structure = value; }
+            return this.Category;
         }
 
-        public string gsDefinition
+        public string setCategory(string category)
         {
-            get { return Definition; }
-            set { Definition = value; }
+            this.Category = category;
+            return this.Category;
         }
 
+        public string getStructure()
+        {
+            return this.Structure;
+        }
+
+        public string setStructure(string structure)
+        {
+            this.Structure = structure;
+            return this.Structure;
+        }
+
+        public string getDefinition()
+        {
+            return this.Definition;
+        }
+
+        public string setDefinition(string definition)
+        {
+            this.Definition = definition;
+            return this.Definition;
+        }
     }
 }
