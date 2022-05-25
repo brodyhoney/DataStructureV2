@@ -11,17 +11,24 @@ namespace DataStructureWikiV2
 
         List<Information> Wiki = new List<Information>(); // 
         string[] comboCategories = { "Array", "List", "Tree", "Graphs", "Abstract", "Hash" }; // Global string array to populate combo box
-        string fileName = "dataStrWiki.dat";
+        
         private void btn_Add_Click(object sender, EventArgs e)
         {
             Information info = new Information();
-            info.setName(textBox_Name.Text);
-            info.setCategory(comboBox_Category.Text);
-            info.setDefinition(textBox_Definition.Text);
-            info.setStructure(getRadioButtonOutput());
-            Wiki.Add(info);
-            DisplayWiki();
-            textBox_Name.Clear();
+            if (validName(textBox_Name.Text) == false)
+            {
+                info.setName(textBox_Name.Text);
+                info.setCategory(comboBox_Category.Text);
+                info.setDefinition(textBox_Definition.Text);
+                info.setStructure(getRadioButtonOutput());
+                Wiki.Add(info);
+                DisplayWiki();
+                textBox_Name.Clear();
+            }
+            else
+            {
+                statusStrip.Text = "That structure is already in the list";
+            }
         }
 
         private void DisplayWiki()
@@ -98,7 +105,7 @@ namespace DataStructureWikiV2
             openFile.InitialDirectory = Application.StartupPath;
             DialogResult dr = openFile.ShowDialog();
             
-            if(dr == DialogResult.OK)
+            if (dr == DialogResult.OK)
             {
                 if (File.Exists("dataStrWiki.dat"))
                 {
@@ -143,6 +150,31 @@ namespace DataStructureWikiV2
                  }
             }
             
+        }
+
+        private bool validName(string n)
+        {
+            if (Wiki.Exists(x => x.getName() == n))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void btn_Del_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to remove this item?", "Removal Confirmation",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                Wiki.Remove(Wiki[listView_Wiki.SelectedIndices[0]]); // Removes selected item
+                DisplayWiki(); // Updates list view
+                statusStrip.Text = "Item removed";
+            }
+                
         }
     }
 }

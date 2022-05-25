@@ -16,24 +16,6 @@ namespace DataStructureWikiV2
         public Information() // default constructor
         { }
 
-        public Information(string nameOfStructure) // constructor with one argument
-        {
-            this.Name = nameOfStructure;
-        }
-
-        public Information(string nameOfStructure, string structureCategory) // constructor with two arguments
-        {
-            this.Name = nameOfStructure;
-            this.Structure = structureCategory;
-        }
-
-        public Information(string nameOfStructure, string structureCategory, string structureType) // constructor with three arguments
-        {
-            this.Name=nameOfStructure;
-            this.Category = structureCategory;
-            this.Structure = structureType;
-        }
-
         public Information(string nameOfStructure, string structureCategory, string structureType, string structureDefinition) // constructor with four arguments
         {
             this.Name = nameOfStructure;

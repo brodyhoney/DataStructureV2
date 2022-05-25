@@ -47,7 +47,10 @@
             this.groupBox_Structure = new System.Windows.Forms.GroupBox();
             this.radioButton_NonLinear = new System.Windows.Forms.RadioButton();
             this.radioButton_Linear = new System.Windows.Forms.RadioButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox_Structure.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Add
@@ -68,6 +71,7 @@
             this.btn_Del.TabIndex = 1;
             this.btn_Del.Text = "DELETE";
             this.btn_Del.UseVisualStyleBackColor = true;
+            this.btn_Del.Click += new System.EventHandler(this.btn_Del_Click);
             // 
             // btn_Edit
             // 
@@ -224,11 +228,28 @@
             this.radioButton_Linear.Text = "Linear";
             this.radioButton_Linear.UseVisualStyleBackColor = true;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 488);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(590, 22);
+            this.statusStrip1.TabIndex = 18;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(39, 17);
+            this.statusStrip.Text = "Status";
+            // 
             // DataStructureWikiV2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 510);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox_Structure);
             this.Controls.Add(this.listView_Wiki);
             this.Controls.Add(this.btn_Search);
@@ -249,6 +270,8 @@
             this.Load += new System.EventHandler(this.DataStructureWikiV2_Load);
             this.groupBox_Structure.ResumeLayout(false);
             this.groupBox_Structure.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,5 +298,7 @@
         private RadioButton radioButton_Linear;
         private ColumnHeader columnName;
         private ColumnHeader columnCategory;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel statusStrip;
     }
 }
