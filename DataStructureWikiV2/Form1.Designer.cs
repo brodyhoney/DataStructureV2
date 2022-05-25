@@ -42,11 +42,11 @@
             this.searchBox = new System.Windows.Forms.TextBox();
             this.btn_Search = new System.Windows.Forms.Button();
             this.listView_Wiki = new System.Windows.Forms.ListView();
+            this.columnName = new System.Windows.Forms.ColumnHeader();
+            this.columnCategory = new System.Windows.Forms.ColumnHeader();
             this.groupBox_Structure = new System.Windows.Forms.GroupBox();
             this.radioButton_NonLinear = new System.Windows.Forms.RadioButton();
             this.radioButton_Linear = new System.Windows.Forms.RadioButton();
-            this.columnName = new System.Windows.Forms.ColumnHeader();
-            this.columnCategory = new System.Windows.Forms.ColumnHeader();
             this.groupBox_Structure.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,13 +88,6 @@
             // comboBox_Category
             // 
             this.comboBox_Category.FormattingEnabled = true;
-            this.comboBox_Category.Items.AddRange(new object[] {
-            "Array",
-            "List",
-            "Tree",
-            "Graphs",
-            "Abstract",
-            "Hash"});
             this.comboBox_Category.Location = new System.Drawing.Point(12, 70);
             this.comboBox_Category.MaxDropDownItems = 6;
             this.comboBox_Category.Name = "comboBox_Category";
@@ -178,11 +171,23 @@
             this.listView_Wiki.FullRowSelect = true;
             this.listView_Wiki.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView_Wiki.Location = new System.Drawing.Point(270, 49);
+            this.listView_Wiki.MultiSelect = false;
             this.listView_Wiki.Name = "listView_Wiki";
             this.listView_Wiki.Size = new System.Drawing.Size(299, 416);
             this.listView_Wiki.TabIndex = 16;
             this.listView_Wiki.UseCompatibleStateImageBehavior = false;
             this.listView_Wiki.View = System.Windows.Forms.View.Details;
+            this.listView_Wiki.Click += new System.EventHandler(this.listView_Wiki_Click);
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "Name";
+            this.columnName.Width = 149;
+            // 
+            // columnCategory
+            // 
+            this.columnCategory.Text = "Category";
+            this.columnCategory.Width = 149;
             // 
             // groupBox_Structure
             // 
@@ -209,23 +214,13 @@
             // radioButton_Linear
             // 
             this.radioButton_Linear.AutoSize = true;
-            this.radioButton_Linear.Location = new System.Drawing.Point(18, 32);
+            this.radioButton_Linear.Location = new System.Drawing.Point(34, 32);
             this.radioButton_Linear.Name = "radioButton_Linear";
             this.radioButton_Linear.Size = new System.Drawing.Size(57, 19);
             this.radioButton_Linear.TabIndex = 0;
             this.radioButton_Linear.TabStop = true;
             this.radioButton_Linear.Text = "Linear";
             this.radioButton_Linear.UseVisualStyleBackColor = true;
-            // 
-            // columnName
-            // 
-            this.columnName.Text = "Name";
-            this.columnName.Width = 149;
-            // 
-            // columnCategory
-            // 
-            this.columnCategory.Text = "Category";
-            this.columnCategory.Width = 149;
             // 
             // DataStructureWikiV2
             // 
@@ -249,6 +244,7 @@
             this.Controls.Add(this.btn_Add);
             this.Name = "DataStructureWikiV2";
             this.Text = "DataStructureWikiV2";
+            this.Load += new System.EventHandler(this.DataStructureWikiV2_Load);
             this.groupBox_Structure.ResumeLayout(false);
             this.groupBox_Structure.PerformLayout();
             this.ResumeLayout(false);
