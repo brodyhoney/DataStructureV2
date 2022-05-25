@@ -137,6 +137,7 @@
             this.btn_Open.TabIndex = 12;
             this.btn_Open.Text = "OPEN";
             this.btn_Open.UseVisualStyleBackColor = true;
+            this.btn_Open.Click += new System.EventHandler(this.btn_Open_Click);
             // 
             // btn_Save
             // 
@@ -146,17 +147,18 @@
             this.btn_Save.TabIndex = 13;
             this.btn_Save.Text = "SAVE";
             this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // searchBox
             // 
             this.searchBox.Location = new System.Drawing.Point(270, 12);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(220, 23);
+            this.searchBox.Size = new System.Drawing.Size(225, 23);
             this.searchBox.TabIndex = 14;
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(494, 12);
+            this.btn_Search.Location = new System.Drawing.Point(501, 12);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(75, 23);
             this.btn_Search.TabIndex = 15;
@@ -173,7 +175,7 @@
             this.listView_Wiki.Location = new System.Drawing.Point(270, 49);
             this.listView_Wiki.MultiSelect = false;
             this.listView_Wiki.Name = "listView_Wiki";
-            this.listView_Wiki.Size = new System.Drawing.Size(299, 416);
+            this.listView_Wiki.Size = new System.Drawing.Size(306, 416);
             this.listView_Wiki.TabIndex = 16;
             this.listView_Wiki.UseCompatibleStateImageBehavior = false;
             this.listView_Wiki.View = System.Windows.Forms.View.Details;
@@ -226,7 +228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 510);
+            this.ClientSize = new System.Drawing.Size(590, 510);
             this.Controls.Add(this.groupBox_Structure);
             this.Controls.Add(this.listView_Wiki);
             this.Controls.Add(this.btn_Search);
