@@ -15,15 +15,19 @@ namespace DataStructureWikiV2
         private void btn_Add_Click(object sender, EventArgs e)
         {
             Information info = new Information();
-            if (validName(textBox_Name.Text) == false)
+            
+            if (duplicateExists(textBox_Name.Text) == false) // Checks for duplicates
             {
-                info.setName(textBox_Name.Text);
-                info.setCategory(comboBox_Category.Text);
-                info.setDefinition(textBox_Definition.Text);
-                info.setStructure(getRadioButtonOutput());
-                Wiki.Add(info);
-                DisplayWiki();
-                textBox_Name.Clear();
+                
+                
+                    info.setName(textBox_Name.Text);
+                    info.setCategory(comboBox_Category.Text);
+                    info.setDefinition(textBox_Definition.Text);
+                    info.setStructure(getRadioButtonOutput());
+                    Wiki.Add(info);
+                    DisplayWiki();
+                    textBox_Name.Clear();
+                
             }
             else
             {
@@ -39,7 +43,8 @@ namespace DataStructureWikiV2
                 string[] Category = { info.getCategory() };
                 listView_Wiki.Items.Add(info.getName()).SubItems.AddRange(Category);
             }
-            listView_Wiki.Sort();
+            Wiki.Sort();
+            
         }
 
         public string getRadioButtonOutput()
@@ -126,6 +131,7 @@ namespace DataStructureWikiV2
                         }
                     }
                     DisplayWiki();
+                    statusStrip.Text = "File opened successfully";
                 }
             
             }
@@ -148,11 +154,12 @@ namespace DataStructureWikiV2
                         writer.Write(info.getDefinition());
                     }
                  }
+                
             }
             
         }
 
-        private bool validName(string n)
+        private bool duplicateExists(string n)
         {
             if (Wiki.Exists(x => x.getName() == n))
             {
@@ -166,15 +173,40 @@ namespace DataStructureWikiV2
 
         private void btn_Del_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Are you sure you want to remove this item?", "Removal Confirmation",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+           
+            if (listView_Wiki.SelectedItems.Count > 0)
             {
-                Wiki.Remove(Wiki[listView_Wiki.SelectedIndices[0]]); // Removes selected item
-                DisplayWiki(); // Updates list view
-                statusStrip.Text = "Item removed";
+                DialogResult dr = MessageBox.Show("Are you sure you want to remove this item?", "Removal Confirmation",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    Wiki.Remove(Wiki[listView_Wiki.SelectedIndices[0]]); // Removes selected item
+                    DisplayWiki(); // Updates list view
+                    statusStrip.Text = "Item removed";
+                }
             }
+            else
+            {
+                statusStrip.Text = "Nothing selected";
+            }  
                 
         }
+
+        private void btn_Edit_Click(object sender, EventArgs e)
+        {
+            if(listView_Wiki.SelectedItems.Count > 0)
+            {
+                Wiki[listView_Wiki.SelectedIndices[0]].setName(textBox_Name.Text);
+                Wiki[listView_Wiki.SelectedIndices[0]].setCategory(comboBox_Category.Text);
+                Wiki[listView_Wiki.SelectedIndices[0]].setStructure(getRadioButtonOutput());
+                Wiki[listView_Wiki.SelectedIndices[0]].setDefinition(textBox_Definition.Text);
+                DisplayWiki();
+            }
+            else
+            {
+                statusStrip.Text = "Nothing selected";
+            }
+        }
+            
+        }
     }
-}

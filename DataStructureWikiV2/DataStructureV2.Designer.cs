@@ -47,8 +47,8 @@
             this.groupBox_Structure = new System.Windows.Forms.GroupBox();
             this.radioButton_NonLinear = new System.Windows.Forms.RadioButton();
             this.radioButton_Linear = new System.Windows.Forms.RadioButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.groupBox_Structure.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +81,7 @@
             this.btn_Edit.TabIndex = 2;
             this.btn_Edit.Text = "EDIT";
             this.btn_Edit.UseVisualStyleBackColor = true;
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
             // textBox_Name
             // 
@@ -228,6 +229,12 @@
             this.radioButton_Linear.Text = "Linear";
             this.radioButton_Linear.UseVisualStyleBackColor = true;
             // 
+            // statusStrip
+            // 
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(39, 17);
+            this.statusStrip.Text = "Status";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -237,12 +244,6 @@
             this.statusStrip1.Size = new System.Drawing.Size(590, 22);
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(39, 17);
-            this.statusStrip.Text = "Status";
             // 
             // DataStructureWikiV2
             // 
@@ -298,7 +299,7 @@
         private RadioButton radioButton_Linear;
         private ColumnHeader columnName;
         private ColumnHeader columnCategory;
-        private StatusStrip statusStrip1;
         private ToolStripStatusLabel statusStrip;
+        private StatusStrip statusStrip1;
     }
 }
