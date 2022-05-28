@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace DataStructureWikiV2
 {
-    internal class Information : IComparable
+    internal class Information : IComparable<Information>
     {
-        private string Name;
-        private string Category;
-        private string Structure;
-        private string Definition;
+        private string Name ="";
+        private string Category = "";
+        private string Structure = "";
+        private string Definition = "";
 
         public Information() // default constructor
         { }
 
-        /*public Information(string nameOfStructure, string structureCategory, string structureType, string structureDefinition) // constructor with four arguments
+        public Information(string strName, string strCategory, string strType, string strDefinition) // constructor with four arguments
         {
-            this.Name = nameOfStructure;
-            this.Category = structureCategory;
-            this.Structure = structureType;
-            this.Definition = structureDefinition;
-        }*/
+            this.Name = strName;
+            this.Category = strCategory;
+            this.Structure = strType;
+            this.Definition = strDefinition;
+        }
 
         // Getters and setters
         
@@ -70,11 +70,11 @@ namespace DataStructureWikiV2
             return this.Definition;
         }
 
-        public int CompareTo(object obj)
+        public int CompareTo(Information? info)
         {
-            if (obj == null) return 1;
+            if (info == null) return 1;
 
-            Information otherInfo = obj as Information;
+            Information otherInfo = info as Information;
             if (otherInfo != null)
                 return this.Name.CompareTo(otherInfo.getName());
             else
