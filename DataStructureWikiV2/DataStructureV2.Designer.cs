@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataStructureWikiV2));
             this.btn_Add = new System.Windows.Forms.Button();
             this.btn_Del = new System.Windows.Forms.Button();
@@ -50,6 +51,12 @@
             this.radioButton_Linear = new System.Windows.Forms.RadioButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTipAdd = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipDel = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipEdit = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipSearch = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipOpen = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipSave = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox_Structure.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -61,8 +68,9 @@
             this.btn_Add.Size = new System.Drawing.Size(75, 23);
             this.btn_Add.TabIndex = 0;
             this.btn_Add.Text = "ADD";
+            this.toolTipAdd.SetToolTip(this.btn_Add, "Click here to add a new item");
             this.btn_Add.UseVisualStyleBackColor = true;
-            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            this.btn_Add.Click += new System.EventHandler(this.Btn_Add_Click);
             // 
             // btn_Del
             // 
@@ -71,8 +79,9 @@
             this.btn_Del.Size = new System.Drawing.Size(75, 23);
             this.btn_Del.TabIndex = 1;
             this.btn_Del.Text = "DELETE";
+            this.toolTipDel.SetToolTip(this.btn_Del, "Click here to delete an item");
             this.btn_Del.UseVisualStyleBackColor = true;
-            this.btn_Del.Click += new System.EventHandler(this.btn_Del_Click);
+            this.btn_Del.Click += new System.EventHandler(this.Btn_Del_Click);
             // 
             // btn_Edit
             // 
@@ -81,8 +90,9 @@
             this.btn_Edit.Size = new System.Drawing.Size(75, 23);
             this.btn_Edit.TabIndex = 2;
             this.btn_Edit.Text = "EDIT";
+            this.toolTipEdit.SetToolTip(this.btn_Edit, "Click here to edit an item");
             this.btn_Edit.UseVisualStyleBackColor = true;
-            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
+            this.btn_Edit.Click += new System.EventHandler(this.Btn_Edit_Click);
             // 
             // textBox_Name
             // 
@@ -90,7 +100,7 @@
             this.textBox_Name.Name = "textBox_Name";
             this.textBox_Name.Size = new System.Drawing.Size(121, 23);
             this.textBox_Name.TabIndex = 3;
-            this.textBox_Name.DoubleClick += new System.EventHandler(this.textBox_Name_DoubleClick);
+            this.textBox_Name.DoubleClick += new System.EventHandler(this.TextBox_Name_DoubleClick);
             // 
             // comboBox_Category
             // 
@@ -143,8 +153,9 @@
             this.btn_Open.Size = new System.Drawing.Size(121, 23);
             this.btn_Open.TabIndex = 12;
             this.btn_Open.Text = "OPEN";
+            this.toolTipOpen.SetToolTip(this.btn_Open, "Click here to open a binary file");
             this.btn_Open.UseVisualStyleBackColor = true;
-            this.btn_Open.Click += new System.EventHandler(this.btn_Open_Click);
+            this.btn_Open.Click += new System.EventHandler(this.Btn_Open_Click);
             // 
             // btn_Save
             // 
@@ -153,8 +164,9 @@
             this.btn_Save.Size = new System.Drawing.Size(110, 23);
             this.btn_Save.TabIndex = 13;
             this.btn_Save.Text = "SAVE";
+            this.toolTipSave.SetToolTip(this.btn_Save, "Click here to save the current list");
             this.btn_Save.UseVisualStyleBackColor = true;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            this.btn_Save.Click += new System.EventHandler(this.Btn_Save_Click);
             // 
             // searchBox
             // 
@@ -170,8 +182,9 @@
             this.btn_Search.Size = new System.Drawing.Size(75, 23);
             this.btn_Search.TabIndex = 15;
             this.btn_Search.Text = "SEARCH";
+            this.toolTipSearch.SetToolTip(this.btn_Search, "Click here to search for an item");
             this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            this.btn_Search.Click += new System.EventHandler(this.Btn_Search_Click);
             // 
             // listView_Wiki
             // 
@@ -187,7 +200,7 @@
             this.listView_Wiki.TabIndex = 16;
             this.listView_Wiki.UseCompatibleStateImageBehavior = false;
             this.listView_Wiki.View = System.Windows.Forms.View.Details;
-            this.listView_Wiki.Click += new System.EventHandler(this.listView_Wiki_Click);
+            this.listView_Wiki.Click += new System.EventHandler(this.ListView_Wiki_Click);
             // 
             // columnName
             // 
@@ -307,5 +320,11 @@
         private ColumnHeader columnCategory;
         private StatusStrip statusStrip;
         private ToolStripStatusLabel toolStripStatus;
+        private ToolTip toolTipAdd;
+        private ToolTip toolTipDel;
+        private ToolTip toolTipEdit;
+        private ToolTip toolTipOpen;
+        private ToolTip toolTipSave;
+        private ToolTip toolTipSearch;
     }
 }

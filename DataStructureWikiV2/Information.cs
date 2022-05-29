@@ -8,7 +8,8 @@ namespace DataStructureWikiV2
 {
     internal class Information : IComparable<Information>, IComparer<Information>
     {
-        public string Name { get; set; }
+        // 6.1 Create a separate class file to hold four data items of the Data Structure
+        public string Name { get; set; } // 6.1 Use auto-implemented properties of type string
         public string Category {get; set; }
         public string Structure {get; set; }
         public string Definition {get; set; }
@@ -29,7 +30,7 @@ namespace DataStructureWikiV2
             this.Definition = strDefinition;
         }
 
-        public int CompareTo(Information? info)
+        public int CompareTo(Information? info) // IComparable to implement sort method
         {
             if (info == null) return 1;
 
@@ -40,7 +41,7 @@ namespace DataStructureWikiV2
                 throw new ArgumentException("Object is not an Information type object");
         }
 
-        public int Compare(Information? x, Information? y)
+        public int Compare(Information? x, Information? y) // IComparer to implement binary search
         {
             return x!.Name.CompareTo(y!.Name);
         }
