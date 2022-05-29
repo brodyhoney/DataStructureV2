@@ -93,7 +93,7 @@
             // comboBox_Category
             // 
             this.comboBox_Category.FormattingEnabled = true;
-            this.comboBox_Category.Location = new System.Drawing.Point(12, 70);
+            this.comboBox_Category.Location = new System.Drawing.Point(12, 73);
             this.comboBox_Category.MaxDropDownItems = 6;
             this.comboBox_Category.Name = "comboBox_Category";
             this.comboBox_Category.Size = new System.Drawing.Size(121, 23);
@@ -169,6 +169,7 @@
             this.btn_Search.TabIndex = 15;
             this.btn_Search.Text = "SEARCH";
             this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // listView_Wiki
             // 
@@ -200,7 +201,7 @@
             // 
             this.groupBox_Structure.Controls.Add(this.radioButton_NonLinear);
             this.groupBox_Structure.Controls.Add(this.radioButton_Linear);
-            this.groupBox_Structure.Location = new System.Drawing.Point(12, 99);
+            this.groupBox_Structure.Location = new System.Drawing.Point(12, 102);
             this.groupBox_Structure.Name = "groupBox_Structure";
             this.groupBox_Structure.Size = new System.Drawing.Size(237, 73);
             this.groupBox_Structure.TabIndex = 17;
