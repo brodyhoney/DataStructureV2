@@ -230,7 +230,7 @@ namespace DataStructureWikiV2
         {
             ClearAttributes();
         }// 6.13 Double click event that clears all attribute boxes
-
+        
         #endregion
         #region: FileIO
         private void DataStructureWikiV2_Load(object sender, EventArgs e)
