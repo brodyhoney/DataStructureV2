@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataStructureWikiV2));
             this.btn_Add = new System.Windows.Forms.Button();
             this.btn_Del = new System.Windows.Forms.Button();
             this.btn_Edit = new System.Windows.Forms.Button();
@@ -47,10 +48,10 @@
             this.groupBox_Structure = new System.Windows.Forms.GroupBox();
             this.radioButton_NonLinear = new System.Windows.Forms.RadioButton();
             this.radioButton_Linear = new System.Windows.Forms.RadioButton();
-            this.statusStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox_Structure.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Add
@@ -89,6 +90,7 @@
             this.textBox_Name.Name = "textBox_Name";
             this.textBox_Name.Size = new System.Drawing.Size(121, 23);
             this.textBox_Name.TabIndex = 3;
+            this.textBox_Name.DoubleClick += new System.EventHandler(this.textBox_Name_DoubleClick);
             // 
             // comboBox_Category
             // 
@@ -232,26 +234,26 @@
             // 
             // statusStrip
             // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatus});
+            this.statusStrip.Location = new System.Drawing.Point(0, 488);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(39, 17);
+            this.statusStrip.Size = new System.Drawing.Size(590, 22);
+            this.statusStrip.TabIndex = 18;
             this.statusStrip.Text = "Status";
             // 
-            // statusStrip1
+            // toolStripStatus
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusStrip});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 488);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(590, 22);
-            this.statusStrip1.TabIndex = 18;
-            this.statusStrip1.Text = "statusStrip1";
+            this.toolStripStatus.Name = "toolStripStatus";
+            this.toolStripStatus.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatus.Text = "Status";
             // 
             // DataStructureWikiV2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 510);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox_Structure);
             this.Controls.Add(this.listView_Wiki);
             this.Controls.Add(this.btn_Search);
@@ -267,13 +269,16 @@
             this.Controls.Add(this.btn_Edit);
             this.Controls.Add(this.btn_Del);
             this.Controls.Add(this.btn_Add);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DataStructureWikiV2";
             this.Text = "DataStructureWikiV2";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DataStructureWikiV2_FormClosed);
             this.Load += new System.EventHandler(this.DataStructureWikiV2_Load);
             this.groupBox_Structure.ResumeLayout(false);
             this.groupBox_Structure.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,7 +305,7 @@
         private RadioButton radioButton_Linear;
         private ColumnHeader columnName;
         private ColumnHeader columnCategory;
-        private ToolStripStatusLabel statusStrip;
-        private StatusStrip statusStrip1;
+        private StatusStrip statusStrip;
+        private ToolStripStatusLabel toolStripStatus;
     }
 }

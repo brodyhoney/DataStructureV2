@@ -15,7 +15,7 @@ namespace DataStructureWikiV2
         private void btn_Add_Click(object sender, EventArgs e)
         {
             resetStatusStrip();
-            if (anyAttributesEmpty() == false)  
+            if (anyAttributesEmpty() == false)
             {
                 if (duplicateExists(textBox_Name.Text) == false) // Checks for duplicates
                 {
@@ -26,46 +26,33 @@ namespace DataStructureWikiV2
                 }
                 else
                 {
-                    statusStrip.Text = "That structure is already in the list";
+                    toolStripStatus.Text = "That structure is already in the list";
                 }
             }
             else
             {
-                statusStrip.Text = "One or more attributes are empty";
+                toolStripStatus.Text = "One or more attributes are empty";
             }
         }
         private void btn_Open_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.InitialDirectory = Application.StartupPath;
+            openFile.Filter = "Data files|*.dat; *.bin";
+            openFile.DefaultExt = ".dat";
             DialogResult dr = openFile.ShowDialog();
+            string fileName = openFile.FileName;
             resetStatusStrip();
             if (dr == DialogResult.OK)
             {
-                openList();
+                openList(fileName);
+                toolStripStatus.Text = "File '" + fileName + "' successfully opened";
             }
+            
         }
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.InitialDirectory = Application.StartupPath;
-            DialogResult dr = saveFile.ShowDialog();
-            resetStatusStrip();
-            using (var stream = File.Open("dataStrWiki.dat", FileMode.Create))
-            {
-                using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
-                {
-                    foreach (var info in Wiki)
-                    {
-                        writer.Write(info.Name);
-                        writer.Write(info.Category);
-                        writer.Write(info.Structure);
-                        writer.Write(info.Definition);
-                    }
-                }
-
-            }
-
+            saveList();
         }
         private void btn_Del_Click(object sender, EventArgs e)
         {
@@ -79,12 +66,12 @@ namespace DataStructureWikiV2
                     Wiki.Remove(Wiki[listView_Wiki.SelectedIndices[0]]); // Removes selected item
                     displayWiki(); // Updates list view
                     clearAttributes();
-                    statusStrip.Text = "Item removed";
+                    toolStripStatus.Text = "Item removed";
                 }
             }
             else
             {
-                statusStrip.Text = "Nothing selected";
+                toolStripStatus.Text = "Nothing selected";
             }
 
         }
@@ -99,11 +86,11 @@ namespace DataStructureWikiV2
                 Wiki[listView_Wiki.SelectedIndices[0]].Definition = textBox_Definition.Text;
                 displayWiki();
                 clearAttributes();
-                statusStrip.Text = "Item edited";
+                toolStripStatus.Text = "Item edited";
             }
             else
             {
-                statusStrip.Text = "Nothing selected";
+                toolStripStatus.Text = "Nothing selected";
             }
         }
         private void btn_Search_Click(object sender, EventArgs e)
@@ -114,19 +101,19 @@ namespace DataStructureWikiV2
                 int index = Wiki.BinarySearch(new Information { Name = target });
                 if (index < 0)
                 {
-                    statusStrip.Text = "Item not found";
+                    toolStripStatus.Text = "Item not found";
                     searchBox.Clear();
                 }
                 else
                 {
                     selectListViewItem(index);
-                    statusStrip.Text = "Item found";
+                    toolStripStatus.Text = "Item found";
                     searchBox.Clear();
                 }
             }
             else
             {
-                statusStrip.Text = "Search box is empty";
+                toolStripStatus.Text = "Search box is empty";
             }
         }
         #endregion
@@ -140,7 +127,7 @@ namespace DataStructureWikiV2
                 string[] Category = { info.Category };
                 listView_Wiki.Items.Add(info.Name).SubItems.AddRange(Category);
             }
-            
+
 
         }
         public string getRadioButtonOutput()
@@ -175,11 +162,11 @@ namespace DataStructureWikiV2
             if (index >= 0)
             {
                 listView_Wiki.Items[index].Selected = true;
-                
+
                 textBox_Name.Text = Wiki[index].Name; // Sets name textbox to selected item's name
                 comboBox_Category.Text = Wiki[index].Category; // Sets combobox current item to selected item's category
                 textBox_Definition.Text = Wiki[index].Definition; // Sets definition textbox to selected item's definition
-                statusStrip.Text = "Item " + Wiki[index].Name + " selected";
+                toolStripStatus.Text = "Item " + Wiki[index].Name + " selected";
                 // If statement that determines whether selected item's structure
                 // is linear or non-linear, then sends an integer value to highlight radio button method
                 if (Wiki[index].Structure.Equals("Linear"))
@@ -195,35 +182,6 @@ namespace DataStructureWikiV2
         private void listView_Wiki_Click(object sender, EventArgs e)
         {
             selectListViewItem(listView_Wiki.SelectedIndices[0]);
-        }
-        private void DataStructureWikiV2_Load(object sender, EventArgs e)
-        {
-            foreach (var category in comboCategories)
-            {
-                comboBox_Category.Items.Add(category);
-            }
-            openList();
-
-        }
-        private void openList()
-        {
-            if (File.Exists("dataStrWiki.dat"))
-            {
-                using (var stream = File.Open("dataStrWiki.dat", FileMode.Open))
-                {
-                    using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
-                    {
-                        Wiki.Clear();
-                        while (stream.Position < stream.Length)
-                        {
-                            Information readInfo = new Information(reader.ReadString(), reader.ReadString(), reader.ReadString(), reader.ReadString());
-                            Wiki.Add(readInfo);
-                        }
-                    }
-                }
-                Wiki.Sort();
-                displayWiki();
-            }
         }
         private bool duplicateExists(string n)
         {
@@ -258,7 +216,7 @@ namespace DataStructureWikiV2
             {
                 return true;
             }
-            else if(radioButton_Linear.Checked == false && radioButton_NonLinear.Checked == false)
+            else if (radioButton_Linear.Checked == false && radioButton_NonLinear.Checked == false)
             {
                 return true;
             }
@@ -269,13 +227,90 @@ namespace DataStructureWikiV2
         }
         private void resetStatusStrip()
         {
-            statusStrip.Text = "Status";
+            toolStripStatus.Text = "Status";
+        }
+        private void textBox_Name_DoubleClick(object sender, EventArgs e)
+        {
+            clearAttributes();
         }
 
-        
-    }
-    #endregion
+        #endregion
+        #region: FileIO
+        private void DataStructureWikiV2_Load(object sender, EventArgs e)
+        {
+            foreach (var category in comboCategories)
+            {
+                comboBox_Category.Items.Add(category);
+            }
+            openList("dataStrWiki_defaultList.dat");
 
+        }
+        private void DataStructureWikiV2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Do you wish to save the current list?", "Save Confirmation",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(dr == DialogResult.Yes)
+            {
+                saveList();
+            }
+            
+        }
+        private void openList(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                using (var stream = File.Open(fileName, FileMode.Open))
+                {
+                    using (var reader = new BinaryReader(stream, Encoding.UTF8, false))
+                    {
+                        Wiki.Clear();
+                        while (stream.Position < stream.Length)
+                        {
+                            Information readInfo = new Information(reader.ReadString(), reader.ReadString(), reader.ReadString(), reader.ReadString());
+                            Wiki.Add(readInfo);
+                        }
+                        toolStripStatus.Text = "File '" + fileName + "' successfully opened";
+                    }
+                }
+                Wiki.Sort();
+                displayWiki();
+                
+            }
+            
+        }
+        private void saveList()
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.InitialDirectory = Application.StartupPath;
+            saveFile.Filter = "Data Files |*.dat; *.bin";
+            saveFile.DefaultExt = ".dat";
+            saveFile.AddExtension = true;
+            DialogResult dr = saveFile.ShowDialog();
+            string fileName = saveFile.FileName;
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                using (var stream = File.Open(fileName, FileMode.Create))
+                {
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                    {
+                        foreach (var info in Wiki)
+                        {
+                            writer.Write(info.Name);
+                            writer.Write(info.Category);
+                            writer.Write(info.Structure);
+                            writer.Write(info.Definition);
+                        }
+                        toolStripStatus.Text = "File '" + fileName + "' saved successfully";
+                    }
+
+                }
+            }
+
+                
+            
+        }
+        #endregion
+    }
 
 
 

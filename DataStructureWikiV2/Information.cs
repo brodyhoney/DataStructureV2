@@ -42,7 +42,7 @@ namespace DataStructureWikiV2
 
         public int Compare(Information? x, Information? y)
         {
-            return x.Name.CompareTo(y.Name);
+            return x!.Name.CompareTo(y!.Name);
         }
     }
 }
