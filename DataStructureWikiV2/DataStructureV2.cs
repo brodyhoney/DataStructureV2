@@ -108,7 +108,26 @@ namespace DataStructureWikiV2
         }
         private void btn_Search_Click(object sender, EventArgs e)
         {
-
+            string target = searchBox.Text;
+            if (!string.IsNullOrEmpty(target))
+            {
+                int index = Wiki.BinarySearch(new Information { Name = target });
+                if (index < 0)
+                {
+                    statusStrip.Text = "Item not found";
+                    searchBox.Clear();
+                }
+                else
+                {
+                    selectListViewItem(index);
+                    statusStrip.Text = "Item found";
+                    searchBox.Clear();
+                }
+            }
+            else
+            {
+                statusStrip.Text = "Search box is empty";
+            }
         }
         #endregion
         #region: UtilityMethods
@@ -151,23 +170,31 @@ namespace DataStructureWikiV2
                 radioButton_NonLinear.Checked = true;
             }
         }
+        public void selectListViewItem(int index)
+        {
+            if (index >= 0)
+            {
+                listView_Wiki.Items[index].Selected = true;
+                
+                textBox_Name.Text = Wiki[index].Name; // Sets name textbox to selected item's name
+                comboBox_Category.Text = Wiki[index].Category; // Sets combobox current item to selected item's category
+                textBox_Definition.Text = Wiki[index].Definition; // Sets definition textbox to selected item's definition
+                statusStrip.Text = "Item " + Wiki[index].Name + " selected";
+                // If statement that determines whether selected item's structure
+                // is linear or non-linear, then sends an integer value to highlight radio button method
+                if (Wiki[index].Structure.Equals("Linear"))
+                {
+                    highlightRadioBtn(0);
+                }
+                else if (Wiki[index].Structure.Equals("Non-Linear"))
+                {
+                    highlightRadioBtn(1);
+                }
+            }
+        }
         private void listView_Wiki_Click(object sender, EventArgs e)
         {
-            int index = listView_Wiki.SelectedIndices[0];
-            textBox_Name.Text = Wiki[index].Name; // Sets name textbox to selected item's name
-            comboBox_Category.Text = Wiki[index].Category; // Sets combobox current item to selected item's category
-            textBox_Definition.Text = Wiki[index].Definition; // Sets definition textbox to selected item's definition
-            statusStrip.Text = "Item " + Wiki[index].Name + " selected";
-            // If statement that determines whether selected item's structure
-            // is linear or non-linear, then sends an integer value to highlight radio button method
-            if (Wiki[index].Structure.Equals("Linear"))
-            {
-                highlightRadioBtn(0);
-            }
-            else if (Wiki[index].Structure.Equals("Non-Linear"))
-            {
-                highlightRadioBtn(1);
-            }
+            selectListViewItem(listView_Wiki.SelectedIndices[0]);
         }
         private void DataStructureWikiV2_Load(object sender, EventArgs e)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataStructureWikiV2
 {
-    internal class Information : IComparable<Information>
+    internal class Information : IComparable<Information>, IComparer<Information>
     {
         public string Name { get; set; }
         public string Category {get; set; }
@@ -38,6 +38,11 @@ namespace DataStructureWikiV2
                 return this.Name.CompareTo(otherInfo.Name);
             else
                 throw new ArgumentException("Object is not an Information type object");
+        }
+
+        public int Compare(Information? x, Information? y)
+        {
+            return x.Name.CompareTo(y.Name);
         }
     }
 }
