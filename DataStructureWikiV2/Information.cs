@@ -16,10 +16,10 @@ namespace DataStructureWikiV2
 
         public Information() // default constructor
         {
-            Name = "";
-            Category = "";
-            Structure = "";
-            Definition = "";
+            this.Name = "";
+            this.Category = "";
+            this.Structure = "";
+            this.Definition = "";
         }
 
         public Information(string strName, string strCategory, string strType, string strDefinition) // constructor with four arguments

@@ -23,6 +23,7 @@ namespace DataStructureWikiV2
                     Wiki.Add(info);
                     DisplayWiki();
                     ClearAttributes();
+                    toolStripStatus.Text = "Structure added";
                 }
                 else
                 {
@@ -244,13 +245,32 @@ namespace DataStructureWikiV2
         }// A default list is loaded upon program start
         private void DataStructureWikiV2_FormClosed(object sender, FormClosedEventArgs e)
         {
+            /* Gives user option to save a new file or overwrite an existing one
             DialogResult dr = MessageBox.Show("Do you wish to save the current list?", "Save Confirmation",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(dr == DialogResult.Yes)
             {
                 SaveList();
             }
-            
+            */
+            // Save current list to a default list
+            using (var stream = File.Open("dataStrWiki_defaultList.dat", FileMode.Create))
+            {
+                using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                {
+                    foreach (var info in Wiki)
+                    {
+                        writer.Write(info.Name);
+                        writer.Write(info.Category);
+                        writer.Write(info.Structure);
+                        writer.Write(info.Definition);
+                    }
+                    
+                }
+
+            }
+
+
         }// 6.15 Data is saved on program exit (if the user chooses to)
         private void OpenList(string fileName)
         {
@@ -280,7 +300,7 @@ namespace DataStructureWikiV2
                 Console.WriteLine(e.Message);
             }
             
-        }
+        }// Method to read a binary file to the List
         private void SaveList()
         {
             try
@@ -318,7 +338,8 @@ namespace DataStructureWikiV2
 
                 
             
-        }
+        }// Method to write current list to a new or existing binary file
+
         #endregion
     }
 
