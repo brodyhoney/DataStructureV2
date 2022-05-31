@@ -14,7 +14,6 @@ namespace DataStructureWikiV2
         #region: Buttons
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            ResetStatusStrip();
             if (AnyAttributesEmpty() == false)
             {
                 if (DuplicateExists(textBox_Name.Text) == false) // Checks for duplicates
@@ -28,11 +27,13 @@ namespace DataStructureWikiV2
                 else
                 {
                     toolStripStatus.Text = "That structure is already in the list";
+                    ClearAttributes();
                 }
             }
             else
             {
                 toolStripStatus.Text = "One or more attributes are empty";
+                ClearAttributes();
             }
         } // 6.3 Add new record to list
         private void Btn_Open_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace DataStructureWikiV2
             if (dr == DialogResult.OK)
             {
                 OpenList(fileName);
+                toolStripStatus.Visible = true;
                 toolStripStatus.Text = "File '" + fileName + "' successfully opened";
             }
             
@@ -78,13 +80,30 @@ namespace DataStructureWikiV2
         {
             if (listView_Wiki.SelectedItems.Count > 0)
             {
-                Wiki[listView_Wiki.SelectedIndices[0]].Name = textBox_Name.Text;
-                Wiki[listView_Wiki.SelectedIndices[0]].Category = comboBox_Category.Text;
-                Wiki[listView_Wiki.SelectedIndices[0]].Structure = GetRadioButtonOutput();
-                Wiki[listView_Wiki.SelectedIndices[0]].Definition = textBox_Definition.Text;
-                DisplayWiki();
-                ClearAttributes();
-                toolStripStatus.Text = "Item edited";
+                if (!AnyAttributesEmpty()) // Check if any of the attributes are empty
+                {
+                    if (!DuplicateExists(textBox_Name.Text)) // Check that a duplicate is not being added
+                    {
+                        Wiki[listView_Wiki.SelectedIndices[0]].Name = textBox_Name.Text;
+                        Wiki[listView_Wiki.SelectedIndices[0]].Category = comboBox_Category.Text;
+                        Wiki[listView_Wiki.SelectedIndices[0]].Structure = GetRadioButtonOutput();
+                        Wiki[listView_Wiki.SelectedIndices[0]].Definition = textBox_Definition.Text;
+                        DisplayWiki();
+                        ClearAttributes();
+                        toolStripStatus.Text = "Item edited";
+                    }
+                    else
+                    {
+                        toolStripStatus.Text = "That structure is already in the list";
+                        ClearAttributes();
+                    }
+                }
+                else
+                {
+                    toolStripStatus.Text = "One or more attributes are empty";
+                    ClearAttributes();
+                }
+                
             }
             else
             {
@@ -297,7 +316,7 @@ namespace DataStructureWikiV2
             }
             catch(Exception e) 
             { 
-                Console.WriteLine(e.Message);
+                toolStripStatus.Text = e.Message;
             }
             
         }// Method to read a binary file to the List
@@ -325,6 +344,7 @@ namespace DataStructureWikiV2
                                 writer.Write(info.Structure);
                                 writer.Write(info.Definition);
                             }
+                            toolStripStatus.Visible = true;
                             toolStripStatus.Text = "File '" + fileName + "' saved successfully";
                         }
 
@@ -333,7 +353,7 @@ namespace DataStructureWikiV2
             }
             catch (Exception e)
             {
-                Console.WriteLine (e.Message);
+                toolStripStatus.Text = e.Message;
             }
 
                 
