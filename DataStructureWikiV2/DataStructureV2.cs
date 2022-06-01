@@ -59,7 +59,8 @@ namespace DataStructureWikiV2
         }// 6.14 Save binary file
         private void Btn_Del_Click(object sender, EventArgs e)
         { 
-            TextWriterTraceListener tr = new TextWriterTraceListener(System.Console.Out);
+            TextWriterTraceListener tr = new TextWriterTraceListener(System.IO.File.CreateText("delete_tracelog.txt"));
+            Trace.AutoFlush = true;
             Trace.Listeners.Add(tr);
             Trace.WriteLine("START: Debugging Delete button");
             if (listView_Wiki.SelectedItems.Count > 0)
@@ -78,7 +79,6 @@ namespace DataStructureWikiV2
                     Trace.WriteLineIf(dr == DialogResult.Yes, "Selected item removed, method working correctly");
                     Trace.Unindent();
                     Trace.WriteLine("END: Debugging Delete button complete");
-                    Trace.Flush();
                     DisplayWiki(); // Updates list view
                     ClearAttributes();
                     toolStripStatus.Text = "Item removed";
@@ -88,7 +88,7 @@ namespace DataStructureWikiV2
             {
                 Trace.WriteLineIf(!(listView_Wiki.SelectedItems.Count > 0), "No item selected, nothing to delete");
                 Trace.WriteLine("END: Debugging Delete button complete");
-                Trace.Flush();
+                
                 toolStripStatus.Text = "Nothing selected";
             }
             
@@ -96,8 +96,9 @@ namespace DataStructureWikiV2
         }// 6.7 Deleted selected record from the list
         private void Btn_Edit_Click(object sender, EventArgs e)
         {
-            TextWriterTraceListener tr = new TextWriterTraceListener(System.Console.Out);
+            TextWriterTraceListener tr = new TextWriterTraceListener(System.IO.File.CreateText("edit_tracelog.txt"));
             Trace.Listeners.Add(tr);
+            Trace.AutoFlush = true;
             Trace.WriteLine("START: Debugging Edit button");
             Trace.Indent();
             if (listView_Wiki.SelectedItems.Count > 0)
@@ -114,7 +115,6 @@ namespace DataStructureWikiV2
                         Trace.WriteLine("Item "+textBox_Name.Text+" successfully edited, method working correctly");
                         Trace.Unindent();
                         Trace.WriteLine("END: Debugging Edit button complete");
-                        Trace.Flush();
                         DisplayWiki();
                         ClearAttributes();
                         toolStripStatus.Text = "Item edited";
@@ -124,7 +124,6 @@ namespace DataStructureWikiV2
                         Trace.WriteLineIf(!ValidName(textBox_Name.Text), "Can't edit, duplicate detected");
                         Trace.Unindent();
                         Trace.WriteLine("END: Debugging Edit button complete");
-                        Trace.Flush();
                         toolStripStatus.Text = "That structure is already in the list";
                         ClearAttributes();
                     }
@@ -134,7 +133,6 @@ namespace DataStructureWikiV2
                     Trace.WriteLineIf(!AnyAttributesEmpty(), "Can't edit, one or more attributes are empty");
                     Trace.Unindent();
                     Trace.WriteLine("END: Debugging Edit button complete");
-                    Trace.Flush();
                     toolStripStatus.Text = "One or more attributes are empty";
                     ClearAttributes();
                 }
@@ -145,7 +143,6 @@ namespace DataStructureWikiV2
                 Trace.WriteLineIf(!(listView_Wiki.SelectedItems.Count > 0), "No item selected, nothing to edit");
                 Trace.Unindent();
                 Trace.WriteLine("END: Debugging Edit button complete");
-                Trace.Flush();
                 toolStripStatus.Text = "Nothing selected";
             }
         }// 6.8 Edit selected record 
@@ -241,30 +238,29 @@ namespace DataStructureWikiV2
         }// 6.11 Event to select record from list and display it's attributes
         private bool ValidName(string n)
         {
-            /*TextWriterTraceListener tr1 = new TextWriterTraceListener(System.Console.Out);
+            TextWriterTraceListener tr1 = new TextWriterTraceListener(System.IO.File.CreateText("validName_tracelog.txt"));
             Trace.Listeners.Add(tr1);
+            Trace.AutoFlush = true;
             Trace.WriteLine("START: Debugging ValidName() Method");
             Trace.Indent();
-            Trace.WriteLine("Testing for duplicates of '" + n + "'.");*/
-            
+            Trace.WriteLine("Testing for duplicates of '" + n + "'.");
+
             if (Wiki.Exists(info => info.Name == n))
             {
-                /*Trace.WriteLineIf(Wiki.Exists(info => info.Name == n), n+" has a duplicate");
+                Trace.WriteLineIf(Wiki.Exists(info => info.Name == n), n+" has a duplicate");
                 Trace.WriteLine("Duplicates prevented, method functioning correctly");
                 Trace.Unindent();
                 Trace.WriteLine("END: Debugging of ValidName() Method complete");
-                Trace.Flush();
-                Console.ReadLine();*/
+                Console.ReadLine();
                 return true;
             }
             else
             {
-                /*Trace.WriteLineIf(!(Wiki.Exists(info => info.Name == n)), n+" has no duplicate");
+                Trace.WriteLineIf(!(Wiki.Exists(info => info.Name == n)), n+" has no duplicate");
                 Trace.WriteLine("No duplicates detected, method functioning correctly");
                 Trace.Unindent();
                 Trace.WriteLine("END: Debugging of ValidName() Method complete");
-                Trace.Flush();
-                Console.ReadLine();*/
+                Console.ReadLine();
                 return false;
             }
             
