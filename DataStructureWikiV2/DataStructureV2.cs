@@ -16,7 +16,7 @@ namespace DataStructureWikiV2
         {
             if (!AnyAttributesEmpty())
             {
-                if (!DuplicateExists(textBox_Name.Text)) // Checks for duplicates
+                if (!ValidName(textBox_Name.Text)) // Checks for duplicates
                 {
                     Information info = new Information(textBox_Name.Text, comboBox_Category.Text, GetRadioButtonOutput(), textBox_Definition.Text);
                     Wiki.Add(info);
@@ -82,7 +82,7 @@ namespace DataStructureWikiV2
             {
                 if (!AnyAttributesEmpty()) // Check if any of the attributes are empty
                 {
-                    if (!DuplicateExists(textBox_Name.Text)) // Check that a duplicate is not being added
+                    if (!ValidName(textBox_Name.Text)) // Check that a duplicate is not being added
                     {
                         Wiki[listView_Wiki.SelectedIndices[0]].Name = textBox_Name.Text;
                         Wiki[listView_Wiki.SelectedIndices[0]].Category = comboBox_Category.Text;
@@ -200,7 +200,7 @@ namespace DataStructureWikiV2
         {
             SelectListViewItem(listView_Wiki.SelectedIndices[0]);
         }// 6.11 Event to select record from list and display it's attributes
-        private bool DuplicateExists(string n)
+        private bool ValidName(string n)
         {
             if (Wiki.Exists(info => info.Name == n))
             {
