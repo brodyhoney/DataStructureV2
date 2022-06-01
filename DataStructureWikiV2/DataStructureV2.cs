@@ -299,11 +299,7 @@ namespace DataStructureWikiV2
             {
                 return false;
             }
-        }
-        private void ResetStatusStrip()
-        {
-            toolStripStatus.Text = "Status";
-        }
+        }// Method that checks for empty attributes
         private void TextBox_Name_DoubleClick(object sender, EventArgs e)
         {
             ClearAttributes();
@@ -331,20 +327,27 @@ namespace DataStructureWikiV2
             }
             */
             // Save current list to a default list
-            using (var stream = File.Open("dataStrWiki_defaultList.dat", FileMode.Create))
+            try
             {
-                using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                using (var stream = File.Open("dataStrWiki_defaultList.dat", FileMode.Create)) // Overwrite default list with current list
                 {
-                    foreach (var info in Wiki)
+                    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
                     {
-                        writer.Write(info.Name);
-                        writer.Write(info.Category);
-                        writer.Write(info.Structure);
-                        writer.Write(info.Definition);
-                    }
-                    
-                }
+                        foreach (var info in Wiki)
+                        {
+                            writer.Write(info.Name);
+                            writer.Write(info.Category);
+                            writer.Write(info.Structure);
+                            writer.Write(info.Definition);
+                        }
 
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);    
             }
 
 
@@ -372,9 +375,9 @@ namespace DataStructureWikiV2
                     DisplayWiki();
                 }
             }
-            catch(Exception e) 
-            { 
-                toolStripStatus.Text = e.Message;
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
             }
             
         }// Method to read a binary file to the List
@@ -411,7 +414,7 @@ namespace DataStructureWikiV2
             }
             catch (Exception e)
             {
-                toolStripStatus.Text = e.Message;
+                MessageBox.Show(e.Message);
             }
 
                 
