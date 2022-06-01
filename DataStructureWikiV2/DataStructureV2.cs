@@ -14,9 +14,9 @@ namespace DataStructureWikiV2
         #region: Buttons
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            if (AnyAttributesEmpty() == false)
+            if (!AnyAttributesEmpty())
             {
-                if (DuplicateExists(textBox_Name.Text) == false) // Checks for duplicates
+                if (!DuplicateExists(textBox_Name.Text)) // Checks for duplicates
                 {
                     Information info = new Information(textBox_Name.Text, comboBox_Category.Text, GetRadioButtonOutput(), textBox_Definition.Text);
                     Wiki.Add(info);
